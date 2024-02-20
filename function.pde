@@ -1,8 +1,9 @@
 void drawLines(int category){
     PVector p1;
-    PVector p2;
+    float xoff = 0;
+
     beginShape(); 
-    stroke(categoryColors[category]);
+    stroke(categoryColors[category], lightness[category]);
     // stroke(#FFFFFF);
     noFill();
     //fill(categoryColors[category], 50);
@@ -20,7 +21,7 @@ void drawLines(int category){
     endShape();
 
     beginShape(); 
-    stroke(categoryColors[category]);
+    stroke(categoryColors[category], lightness[category]);
     // stroke(#FFFFFF);
     noFill();
     //fill(categoryColors[category], 50);
@@ -129,11 +130,11 @@ void drawVertex(int category){
  void drawCircleAndText() {
     pushMatrix();
     //translate(0, 0, -50);
-    //stroke(180);
+    stroke(#FFFFFF);
     // strokeWeight(1);
     noFill();
     //rotateY(PI/2);
-    stroke(180);
+    // stroke(180);
     strokeWeight(1);
     ellipse(0, 0, maxRadius, maxRadius);
     popMatrix();
@@ -166,7 +167,7 @@ void drawVertex(int category){
     pushMatrix();
     //translate(50, 0, 0);
     noFill();
-    stroke(180);
+    // stroke(180);
     strokeWeight(1);
     //stroke(180);
     // strokeWeight(1);

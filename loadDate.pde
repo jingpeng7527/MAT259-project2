@@ -59,10 +59,19 @@ void loadData() {
 
      float theta = map(year, 2006, 2025, 0, 2*PI);
      float phi = map(month, 1, 13, 0, 2*PI);
-     float r = map(percentage, 0, 0.25, minRadius, maxRadius);
+     float r = minRadius;
+     if (percentage!=0.0) {
+        r = map(log(percentage*1000), log(9.40805E-4*1000), log(1.0416666*1000), minRadius, maxRadius);
+     }
+     
      float x = r * sin(phi) * cos(theta);
      float y = r * sin(phi) * sin(theta);
      float z = r * cos(phi);
+     
+     if(percentage<0.01){
+        System.out.println(year+" "+month+" "+percentage+" "+category);
+     }
+       
 
     // float x = r * cos(theta) * radiusMultiplier;
     // float y = map(month, 1, 12, -100, 100) * radiusMultiplier;

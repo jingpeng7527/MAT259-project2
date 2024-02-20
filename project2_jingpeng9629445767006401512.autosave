@@ -22,7 +22,9 @@ ControlP5 cp5;
 
 PFont font;
 
-boolean hasPoints = true;
+
+int startYear = 2006;
+int endYear = 2023;
 
 int[] fontSize = {280, 14, 12};
 int[] fontColor = {240, 180};
@@ -30,16 +32,10 @@ int[] fontColor = {240, 180};
 float radiusMultiplier = 100; // Multiplier for percentage-based radius
 float minRadius = 100; // Minimum radius for points
 float maxRadius = 200; // Maximum radius for points
-float Radius = 200; //year, month position radius
-float radius = 300; 
+float Radius = 200;
+float radius = 300;
 PVector[] points;
-//color[] categoryColors = {#FFFFFF, #F5F5F5, #EBEBEB, #E0E0E0, #D6D6D6};
-color[] categoryColors = {#FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF};
-
-//int[] lightness = {50,100,150,200,250};
-int l = 75;
-int[] lightness = {l,l,l,l,l};
-
+color[] categoryColors = {#b7e1cd, #d7b5e8, #f4f1bb, #f9d0c4, #a6c8ed};
 int[] kind;
 
 
@@ -50,9 +46,9 @@ ArrayList<Category> categories = new ArrayList<Category>();
 // Map<Integer, ArrayList<Category>> map = new HashMap<Integer,ArrayList<Category>>();
 
 void setup() {
-  size(1250, 800, P3D);
+  size(1250, 650, P3D);
   font = createFont("Arial", 100);
-  cam = new PeasyCam(this, 900);
+  cam = new PeasyCam(this, 750);
   // cam.setMinimumDistance(50);
   // cam.setMaximumDistance(800);
   cp5 = new ControlP5(this);
@@ -80,9 +76,7 @@ void draw() {
     pushMatrix();
     translate(x, y, 0);
     drawCircleAndText();
-    if(hasPoints){
-      drawPoints(k);
-    }
+    drawPoints(k);
     drawLines(k);
     //drawVertex(k);
     popMatrix();
