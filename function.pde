@@ -1,19 +1,13 @@
 void drawLines(int category){
     PVector p1;
-    float xoff = 0;
-
     beginShape(); 
     stroke(categoryColors[category], lightness[category]);
-    // stroke(#FFFFFF);
     noFill();
-    //fill(categoryColors[category], 50);
-    // noStroke();
+
     strokeWeight(1);
     //tint(255, 126); 
     for (int i = 0; i < 17; i++) {
         for (int j = 0; j < 11; j++) {
-            // stroke(#FFFFFF);
-            // strokeWeight(1);
             p1 = points[(i*12+j)*5+category];
             curveVertex(p1.x, p1.y, p1.z);
         }
@@ -22,17 +16,14 @@ void drawLines(int category){
 
     beginShape(); 
     stroke(categoryColors[category], lightness[category]);
-    // stroke(#FFFFFF);
     noFill();
-    //fill(categoryColors[category], 50);
-    //noStroke();
     for (int j = 0; j < 11; j++) {
         for (int i = 0; i < 17; i++) {
             p1 = points[(i*12+j)*5+category];
             curveVertex(p1.x, p1.y, p1.z);
         }
-     }
-     endShape();
+    }
+    endShape();
 }
 
 void drawVertex(int category){
@@ -40,7 +31,6 @@ void drawVertex(int category){
     //int start = 0;
     for (int i = 0; i < 17; ++i) {
        for(int j = 0; j< 11; j++){
-           //for (int category = 0; category < 5; category++) {
                beginShape();
                fill(categoryColors[category], 50);
                noStroke();
@@ -129,7 +119,6 @@ void drawVertex(int category){
 
  void drawCircleAndText() {
     pushMatrix();
-    //translate(0, 0, -50);
     stroke(#FFFFFF);
     // strokeWeight(1);
     noFill();
@@ -141,7 +130,6 @@ void drawVertex(int category){
 
 
     for (int i = 0; i < 12; i++) {
-      //noFill();
       pushMatrix();
       float theta = (i+1)*PI*2/12;
       translate(Radius*cos(theta+PI/2), Radius*sin(theta+PI/2));
@@ -152,20 +140,9 @@ void drawVertex(int category){
       text(i+1, 1, 0);
       popMatrix();
     }
-    //if (showTitle) {
-    //  textAlign(RIGHT, CENTER);
-    //  fill(180);
-    //  textSize(20);
-    //  text(movieTitle, 190, 0);
-    //  //text(movieTitle, 190, 80);
-    //}
-
-    
-    // Draw the second circle at a 90-degree angle from the first circle
     
     rotateY(PI/2);
     pushMatrix();
-    //translate(50, 0, 0);
     noFill();
     // stroke(180);
     strokeWeight(1);
@@ -190,11 +167,18 @@ void drawVertex(int category){
 
 void drawPoints(int category){
     pushMatrix();
-    stroke(categoryColors[category], 180);
-    strokeWeight(4);
+    
     for (int i = 0; i < 17; ++i) {
        for(int j = 0; j< 11; j++){
             int m = (i * 12 + j) * 5 + category;
+            if (special.contains(m) && showSpecial) {
+                stroke(#800000);
+                strokeWeight(12);
+            
+            } else {
+                stroke(categoryColors[category], 180);
+                strokeWeight(4);
+            }
             PVector p1 = points[m];
             point(p1.x, p1.y, p1.z);
        }

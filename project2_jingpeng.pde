@@ -8,10 +8,14 @@ Supervisor: George Legrady
 Purpose: Show how to present volume data in a basic 3D environment     
 
 Usage: 1. A mouse left-drag will rotate the camera around the subject.
-          2. A right drag will zoom in and out. 
-          3. A middle-drag (command-left-drag on mac) will pan. 
-          4. A double-click restores the camera to its original position. 
-          5. The shift key constrains rotation and panning to one axis or the other.
+       2. A right drag will zoom in and out. 
+       3. A middle-drag (command-left-drag on mac) will pan. 
+       4. Press 1-5 to show different categories.
+       5. Press A to draw the 5 categories in one sphere.
+       6. Press 'd' or 'D' to remove ordinates.
+       7. Press 'w' or 'W' to show points.
+       8. Press 's' or 'S' to show special points.
+          
 *************************************************************************************/
 
 import peasy.*;
@@ -22,31 +26,40 @@ ControlP5 cp5;
 
 PFont font;
 
-boolean hasPoints = true;
-
 int[] fontSize = {280, 14, 12};
 int[] fontColor = {240, 180};
 
 float radiusMultiplier = 100; // Multiplier for percentage-based radius
 float minRadius = 100; // Minimum radius for points
 float maxRadius = 200; // Maximum radius for points
-float Radius = 200; //year, month position radius
-float radius = 300; 
+float Radius = 185; //year, month position radius
+float radius = 300; // category radius
 PVector[] points;
-//color[] categoryColors = {#FFFFFF, #F5F5F5, #EBEBEB, #E0E0E0, #D6D6D6};
-color[] categoryColors = {#FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF};
+color[] categoryColors = {#a9d9c4,#dbafb7, #afbcdb, #dbc7af ,#a9d6d9};
+boolean[] click = {false,false,false,false,false};
 
-//int[] lightness = {50,100,150,200,250};
+// color[] categoryColors = {#FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF};
+
 int l = 75;
 int[] lightness = {l,l,l,l,l};
 
+boolean[] showCa = {true, true, true, true, true};
+
+boolean hasPoints = true;
+boolean showAll = false;
+boolean showSpecial = false;
+boolean showAxis = true;
+
 int[] kind;
+String[] categoriesName = {"Anxiety", "Stress","Panic","Depression","Mental_Health"};
 
 
 Table table;
 int numRows, numColumns;
 
 ArrayList<Category> categories = new ArrayList<Category>();
+ArrayList<Integer> special = new ArrayList<Integer>();
+
 // Map<Integer, ArrayList<Category>> map = new HashMap<Integer,ArrayList<Category>>();
 
 void setup() {
@@ -63,38 +76,36 @@ void setup() {
 
 void draw() {
 
-  background(56, 48, 60);
+  background(0);
   gui();
-  
-
-  // noFill();
-  // stroke(0);
-
-  // drawInfo();
-
 
   for(int k = 0; k < 5 ; k++){
-    float theta = map(k, 0, 5, 0, 2*PI);
-    float x = radius * cos(theta);
-    float y = radius * sin(theta);
-    pushMatrix();
-    translate(x, y, 0);
-    drawCircleAndText();
-    if(hasPoints){
-      drawPoints(k);
+    if (showCa[k] == true) {
+      float theta = map(k, 0, 5, 0, 2*PI);
+      float x = radius * cos(theta);
+      float y = radius * sin(theta);
+      pushMatrix();
+      translate(x, y, 0);
+      if(showAxis){
+        drawCircleAndText();
+      }
+      if(hasPoints){
+        drawPoints(k);
+      }
+      drawLines(k);
+      popMatrix();
     }
-    drawLines(k);
-    //drawVertex(k);
-    popMatrix();
-    //drawLabels();
-
   }
-  
 
-  //if((mouseX<180) & (mouseY<180)) {
-  //  cam.setActive(false);
-  //} else {
-  //  cam.setActive(true);
-  //}
-
+  if(showAll){
+    if(showAxis){
+      drawCircleAndText();
+    }
+    for(int k = 0; k < 5 ; k++){
+      if(hasPoints){
+        drawPoints(k);
+      }
+      drawLines(k);
+    }
+  }
 }

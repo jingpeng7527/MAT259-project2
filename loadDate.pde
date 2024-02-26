@@ -12,37 +12,27 @@ void loadData() {
      String category= "Anxiety";
      float percentage = table.getFloat(i,9);
      categories.add(new Category(year, month, date, category, percentage));
-     kind[i * 5] = 0;
-
-         // System.out.println(year+" "+month+" "+date+" "+category+" "+percentage);
+     //kind[i * 5] = 0;
 
      category= "Stress";
      percentage = table.getFloat(i,10);
      categories.add(new Category(year, month, date, category, percentage));
-          kind[i * 5+1] = 1;
-
-     // System.out.println(year+" "+month+" "+date+" "+category+" "+percentage);
+     //kind[i * 5+1] = 1;
 
      category= "Panic";
      percentage = table.getFloat(i,11);
      categories.add(new Category(year, month, date, category, percentage));
-    kind[i * 5+2] = 2;
-
-     // System.out.println(year+" "+month+" "+date+" "+category+" "+percentage);
+    //kind[i * 5+2] = 2;
 
      category= "Depression";
      percentage = table.getFloat(i,12);
      categories.add(new Category(year, month, date, category, percentage));
-    kind[i * 5+3] = 3;
-
-     // System.out.println(year+" "+month+" "+date+" "+category+" "+percentage);
+    //kind[i * 5+3] = 3;
 
      category= "Mental_Health";
      percentage = table.getFloat(i,13);
      categories.add(new Category(year, month, date, category, percentage));
-      kind[i * 5+4] = 4;
-
-     // System.out.println(year+" "+month+" "+date+" "+category+" "+percentage);
+      //kind[i * 5+4] = 4;
    }
    
    points = new PVector[categories.size()];
@@ -55,8 +45,6 @@ void loadData() {
      float percentage = categories.get(i).percentage;
      String category = categories.get(i).category;
 
-     //System.out.println(year+" "+month+" "+percentage+" "+category);
-
      float theta = map(year, 2006, 2025, 0, 2*PI);
      float phi = map(month, 1, 13, 0, 2*PI);
      float r = minRadius;
@@ -68,20 +56,11 @@ void loadData() {
      float y = r * sin(phi) * sin(theta);
      float z = r * cos(phi);
      
-     if(percentage<0.01){
-        System.out.println(year+" "+month+" "+percentage+" "+category);
+     if(percentage > 0.2){
+        special.add(i);
      }
-       
-
-    // float x = r * cos(theta) * radiusMultiplier;
-    // float y = map(month, 1, 12, -100, 100) * radiusMultiplier;
-    // float z = map(percentage, 0, 0.2, -100, 100) * radiusMultiplier;
-
-     //z = 
 
      points[i] = new PVector(x, y, z);
-     // percentages[i] = percentage;
    }
 
-//    radius = maxRadius;
  }

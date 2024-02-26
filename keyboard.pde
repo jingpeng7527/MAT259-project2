@@ -1,31 +1,53 @@
-//void keyPressed() {
-//  //use arrow keys to select increasing/decreasing years
-//  if (keyCode == 38) {
-//    startSelect--;
-//    if (startSelect < 0) {
-//      startSelect = YEAR_COUNT -1;
-//    }
-//  } 
-//  if (keyCode == 40) {
-//    startSelect++;
-//    if (startSelect >= YEAR_COUNT) {
-//      startSelect = 0;
-//    } 
-//  }
+void keyPressed() {
+  if (keyCode == '1') {
+    showCa[0] = !showCa[0];
+    showAll = false;
+  }
+  if (keyCode == '2') {
+    showCa[1] = !showCa[1];
+    showAll = false;
+  }
+  if (keyCode == '3') {
+    showCa[2] = !showCa[2];
+    showAll = false;
+  }
+  if (keyCode == '4') {
+    showCa[3] = !showCa[3];
+    showAll = false;
+  }
+  if (keyCode == '5') {
+    showCa[4] = !showCa[4];
+    showAll = false;
+  }
+
+  if (keyCode == 'a' || keyCode == 'A') {
+    showAll = !showAll;
+    for (int i = 0; i < 5; i++) {
+      showCa[i] = false;
+    }
+  }
+  if (keyCode == 'w' || keyCode == 'W') {
+    hasPoints = !hasPoints;
+  }
+  if (keyCode == 's' || keyCode == 'S') {
+    showSpecial = !showSpecial;
+  }
+  if (keyCode == 'd' || keyCode == 'D') {
+    showAxis = !showAxis;
+  }
+}
+
+void mousePressed(){
   
-//  //use +/- to increase scale of selected year
-//  //need to use log scale so its apparent
-//  //println("key: ", keyCode);
-//  if (keyCode == 61 && heightMult < 8) {
-//    //plus
-//    heightMult = heightMult * 1.5;
-//  }
-//  if (keyCode == 45) {
-//    //minus
-//    if (heightMult >= 1.5) {
-//      heightMult = heightMult /1.5;
-//    } else {
-//      heightMult = 1.0;
-//    }
-//  }
-//}
+  for(int i = 0; i <5; i++){
+    if ( mouseX > 20 && mouseX < 20+15 && 
+    mouseY > 200 + 15*i && mouseY < 200+15*i+15) {
+       click[i] = !click[i];
+       if(click[i]){
+         lightness[i]+=175;
+       }else{
+         lightness[i]=75;
+       }
+     }
+    }
+}

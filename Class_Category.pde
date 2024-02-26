@@ -1,4 +1,3 @@
-// so that in the larger timeline, we can zoom in even further to a mini timeline which will contain all the books (the in date timeline)
 class Category{
     String category;
     String date;
